@@ -1,0 +1,138 @@
+{
+  "status": "killed",
+  "killed_at_stage": 4,
+  "kill_reason": "The pain is Canonical's kernel QA cadence, which no third-party product can fix; the only buildable adjacent product (per-CVE fix-availability tracking and alerting across Ubuntu kernel flavors) is already covered by well-funded or free incumbents with no articulable differentiator. Ubuntu Pro (free for 5 machines, includes Livepatch and Landscape), SysWard (free for 5 servers, 'get alerted immediately when new patch updates are available', cross-references NVD/OVAL/distro feeds), Tenable/Qualys/Rapid7 (all re-scan daily and surface fixed-vs-unfixed), and free scanners Trivy/Grype (report 'fix available: no') all occupy the space. Canonical also structurally changed the process on 2026-09-24 (weekly kernel releases plus a sanctioned -proposed fast lane with 24-48h workaround publication), and in this exact incident the fix had been in -proposed since Oct 26/28, meaning the OP's real gap was not knowing about -proposed, which Canonical's own blog post closed. A single blogger (ma.ttias.be) hand-maintained the per-kernel-flavor vulnerability table for free within days, demonstrating the tracking layer is a weekend side project, not a paid product. Pitching 'patch-lag tracker' is reframing the post to fit.",
+  "stage_2": {
+    "customer": "Infrastructure/DevOps engineer or solo sysadmin responsible for a fleet of 10-200 Ubuntu LTS servers (22.04/24.04/26.04) at a small-to-mid SaaS or hosting company, not on Ubuntu Pro/Landscape, who personally watches ubuntu.com/security/CVE-* pages and applies sysctl/iptables mitigations by hand while waiting for a USN. The OP (linsomniac) fits: knows the kernel flavor page, had mitigations in place for a week, posts to HN not a vendor ticket.",
+    "where": "r/sysadmin, r/linuxadmin, r/Ubuntu, Ubuntu Discourse (Security category), Ask Ubuntu, ubuntu-security-announce and oss-security mailing lists, HN, Mattias Geniar's newsletter/blog (cron.weekly), the SysAdmin Discord",
+    "pays_for": "Ubuntu Pro ($0 for 5 machines, paid per-machine above that, includes Livepatch + Landscape), SysWard (free 5 servers, paid above), Tenable Nessus / Qualys / Rapid7 InsightVM vulnerability scanners, Wiz or Orca if cloud-native, Datadog/Grafana Cloud for monitoring, PagerDuty/Opsgenie for alerting"
+  },
+  "stage_3": {
+    "real_posts": [
+      "https://discourse.ubuntu.com/t/kernel-and-recent-lpe-cves/83470",
+      "https://askubuntu.com/questions/1570733/cve-2026-98432-critical-ubuntu-kernel-issue",
+      "https://www.linkedin.com/pulse/debian-patched-critical-kernel-bug-day-ubuntu-took-19-yadav-stvrc",
+      "https://dredyson.com/how-i-solved-the-ubuntu-26-04-kernel-security-updates-delay-cve-fragnesia-and-dirty-frag-problem-step-by-step-guide/"
+    ],
+    "urgent": "CVSS 9.8 remotely reachable kernel bug with status 'Vulnerable' on Ubuntu's tracker for ~a week; Ask Ubuntu asker (Nov 2) asked 'how to hotfix this'; LinkedIn piece describes a developer taking all Ubuntu servers offline in early Nov 2026; Discourse poster (May 28, 2026) asked the same question about LPE CVEs on 7.0.0-15, so this recurs per critical CVE.",
+    "valuable": "Weakly quantified. Costs found: a week of manually maintained mitigations per critical CVE; one operator took their whole Ubuntu fleet offline (downtime, unquantified); HN thread itself concluded the bug was DoS not RCE, so the exposure cost was lower than the panic suggested. No dollar or hours/week figure appears in any post; the cost is mostly ops anxiety plus a few hours of tracking per incident."
+  },
+  "stage_4": {
+    "software": [
+      "Ubuntu Pro / Livepatch / Landscape (https://ubuntu.com/pro) - free for 5 machines; Canonical's own answer to this exact customer; Livepatch applies kernel CVE fixes without reboot and Landscape reports patch status fleet-wide",
+      "SysWard (https://sysward.com) - free for 5 servers; live CVE monitoring against installed packages, alerts when patches become available, exploitability-ranked queue; this IS the 'patch-lag tracker' product",
+      "Tenable Nessus / Qualys VMDR / Rapid7 InsightVM - enterprise scanners that already show per-host fixed/unfixed status daily; plus free Trivy/Grype which output 'fix available: no' per CVE per package"
+    ],
+    "workarounds": [
+      "Subscribe to Ubuntu Security Notices RSS / ubuntu-security-announce list and grep for the CVE ID",
+      "Enable the -proposed pocket (Canonical's sanctioned fast lane as of Sept 2026) and run your own acceptance test, which is what the fix needed in this incident",
+      "Hand-maintained tracking page or spreadsheet of kernel flavors vs fixed versions, exactly what ma.ttias.be published on Nov 1 and updated hourly for free"
+    ],
+    "graveyard": "GitHub search 'ubuntu cve notify archived:true' returned 0 repos. 'usn security notice watcher OR notifier' returned 2: rtate/usn-processing (1 star, last pushed Sep 2021, dead) and ATIX-AG/errata_parser (10 stars, active, updated 2 days ago, feeds USN/DSA into Foreman/Katello). The pattern is that USN-watching gets absorbed into existing patch-management platforms rather than surviving as standalone tools; that structural reason has not changed."
+  },
+  "stage_5": null,
+  "stage_6": null,
+  "id": "hn_50393105",
+  "title": "Ask HN: What in the world is taking Ubuntu so long?",
+  "url": "https://news.ycombinator.com/item?id=50393105",
+  "source": "hackernews",
+  "score": 182,
+  "num_comments": 117,
+  "app_name": "ask_hn_what_in_the_world_is_taking",
+  "summary": "Ask HN: What in the world is taking Ubuntu so long?",
+  "tech_stack": "Next.js + TypeScript + Tailwind CSS",
+  "_fallback_kill_stage": 4,
+  "_fallback_kill_reason": "The pain is Canonical's kernel QA cadence, which no third-party product can fix; the only buildable adjacent product (per-CVE fix-availability tracking and alerting across Ubuntu kernel flavors) is already covered by well-funded or free incumbents with no articulable differentiator. Ubuntu Pro (free for 5 machines, includes Livepatch and Landscape), SysWard (free for 5 servers, 'get alerted immediately when new patch updates are available', cross-references NVD/OVAL/distro feeds), Tenable/Qualys/Rapid7 (all re-scan daily and surface fixed-vs-unfixed), and free scanners Trivy/Grype (report 'fix available: no') all occupy the space. Canonical also structurally changed the process on 2026-09-24 (weekly kernel releases plus a sanctioned -proposed fast lane with 24-48h workaround publication), and in this exact incident the fix had been in -proposed since Oct 26/28, meaning the OP's real gap was not knowing about -proposed, which Canonical's own blog post closed. A single blogger (ma.ttias.be) hand-maintained the per-kernel-flavor vulnerability table for free within days, demonstrating the tracking layer is a weekend side project, not a paid product. Pitching 'patch-lag tracker' is reframing the post to fit.",
+  "_kill_report": "KILLS -- 2026-11-07\n\nTotal candidates evaluated: 27\nKilled: 27  |  Passed to MVP: 0\n\nBy stage:\n  Stage 1 (signal):       21 killed\n  Stage 2 (customer):     1 killed\n  Stage 3 (problem):      2 killed\n  Stage 4 (alternatives): 3 killed\n  Stage 5 (approach):     0 killed\n  Stage 6 (hypothesis):   0 killed\n",
+  "_total_evaluated": 27,
+  "_total_killed": 27,
+  "_fallback": true,
+  "_runners_up": [
+    {
+      "status": "killed",
+      "killed_at_stage": 4,
+      "kill_reason": "Auto-kill on both Stage 4 triggers. (a) 3+ well-funded free solutions already target the exact gaps the post enumerates: Kiwi.com's whole business is virtual interlining (mixed-carrier round trips, 'London' airport-group search), Kayak/Momondo (Booking Holdings) ship 'Hacker Fares', Skyscanner (Trip.com) does mixed-carrier and multi-airport city searches, and ITA Matrix (Google, free) handles open-jaw and routing codes for power users. I cannot name a differentiator beyond 'meta-meta-search across those', which is just another metasearch. (b) Structural graveyard reasons are unchanged: independent flight metasearch has no revenue when Google takes no referral cut (the OP's own observation), live fare data requires paid GDS/NDC/Kiwi Tequila/Duffel access, and Hipmunk died in Jan 2020 despite ~$55M raised and a Concur/SAP acquisition. A 1-2 day MVP cannot obtain legitimate exhaustive fare data to even demonstrate the promise.",
+      "stage_2": {
+        "customer": "Self-booking frequent leisure travelers (6+ trips/yr) based in a multi-airport metro (London LHR/LGW/STN, NYC, SF Bay, LA) who routinely build their own 'hacker fares' (two one-ways on different carriers), open-jaw returns, and already cross-check Google Flights against airline sites and ITA Matrix. The HN OP is this person; FlyerTalk 'Online Travel Booking' regulars and r/Flights power posters are the room.",
+        "where": "r/Flights, r/travel (flight-hack threads), r/awardtravel, r/churning, FlyerTalk 'Online Travel Booking and Bidding Agencies' forum, Going (ex-Scott's Cheap Flights) newsletter, Thrifty Traveler, DansDeals",
+        "pays_for": "Going Premium (~$49/yr), Thrifty Traveler Premium (~$99/yr), ExpertFlyer (~$99/yr), point.me / seats.aero Pro (~$10-15/mo) for award search, Flighty (~$49/yr) for tracking"
+      },
+      "stage_3": {
+        "real_posts": [
+          "https://www.reddit.com/r/Flights/comments/c6o319/google_flights_only_showing_single_airline/",
+          "https://www.reddit.com/r/americanairlines/comments/15qx95x/why_is_google_flights_is_not_showing_me_a/",
+          "https://www.reddit.com/r/travel/comments/18pmexr/why_cant_i_mix_and_match_on_google_flights/",
+          "https://www.reddit.com/r/Flights/comments/btmzmr/question_google_flights_doesnt_show_all_the_real/",
+          "https://www.flyertalk.com/forum/online-travel-booking-bidding-agencies/2123882-google-flights-not-exhaustive.html",
+          "https://www.reddit.com/r/Flights/comments/s28ue9/is_google_flights_not_showing_accurate/"
+        ],
+        "urgent": "Marginal pass. Each poster is mid-booking for a dated trip (e.g. FlyerTalk poster flying 'tomorrow June 3'), so a fix would be tried in the same session. But no post shows a deadline beyond the natural one of fares moving; nobody is blocked at work. Queries tried: mixed-airline round trip (6 hits), open-jaw/different-airport return (only a DansDeals how-to, 0 complaint posts), flights missing vs airline site (1 hit), 'Google Flights degraded/worse 2025' (0 hits).",
+        "valuable": "Weak. Cost is the fare delta between a true hacker fare and Google's single-ticket result (posters cite differences but no one quantifies; realistic $50-200/trip) plus roughly 30-60 min/trip manually re-searching airline sites. For a 6-trip/yr traveler that is low hundreds of dollars and a few hours per year. Nothing approaches a hair-on-fire number."
+      },
+      "stage_4": {
+        "software": [
+          "Kiwi.com (kiwi.com) - virtual interlining across 600+ carriers, mixed-airline round trips and 'London (all airports)' searches are its core product; insufficient only in that self-transfer protection is its own and prices sometimes drift, which is not a gap a new entrant fixes",
+          "Kayak / Momondo 'Hacker Fares' (kayak.com, momondo.com, Booking Holdings) - explicitly surfaces two one-ways from different airlines as a round trip; covers the OP's item 1 directly",
+          "Skyscanner (skyscanner.net, Trip.com) - mixed-carrier results, multi-airport city codes, 'Everywhere' search; covers items 1 and 3. Plus ITA Matrix (matrix.itasoftware.com) - free Google-owned power tool that does open-jaw, routing codes, and multi-airport for exactly this customer"
+        ],
+        "workarounds": [
+          "Search one-ways separately on Google Flights and manually pair outbound/return across carriers (what r/Flights c6o319 and r/travel 18pmexr commenters recommend)",
+          "Cross-check the airline's own site and ITA Matrix after Google Flights (the OP's current workaround)",
+          "Use multi-city mode with explicit LHR-out / LGW-back legs instead of round-trip mode (DansDeals write-up)"
+        ],
+        "graveyard": "Hipmunk: founded 2010, ~$55M raised, acquired by Concur 2016 (~$58M), shut down by SAP Jan 23 2020 - post-mortems (unicornburn.com, looksback.com) cite competition from free Google Flights and no standalone revenue. GitHub repository search for 'flight search engine archived:true' returns 4 archived repos and '\"google flights\" scraper archived:true' returns 4; I did not read the individual repos so I cannot state their specific reasons, but scraper projects in this space die because Google Flights has no public API and blocks scraping. The structural reasons (no commission model, paid fare-data access, Google giving the product away free) are unchanged in 2026."
+      },
+      "stage_5": null,
+      "stage_6": null,
+      "id": "hn_50358924",
+      "title": "Ask HN: What is Google Flights' business model and has it changed recently?",
+      "url": "https://news.ycombinator.com/item?id=50358924",
+      "source": "hackernews",
+      "score": 8,
+      "num_comments": 7
+    },
+    {
+      "status": "killed",
+      "killed_at_stage": 4,
+      "kill_reason": "The only form of this problem that software can touch is prevention (keeping an independent copy of repos/org data so a lockout is not fatal), and that space already has 3+ funded, mature products (GitProtect, Rewind/BackHub, Cloudback) plus free well-maintained OSS (ghorg 2.1k stars, python-github-backup 1.6k, gitea-mirror 1.5k, native Gitea/GitLab pull mirrors). I cannot articulate a differentiator beyond repackaging backup + GitHub's own 'have 2+ org owners' guidance. The crisis-moment need, which is where the urgency and willingness to pay actually live, is account reinstatement, which no third-party software can deliver; the working workaround is public pressure (HN/X posts), and the candidate's own author replied 'This was resolved for me' within 5 days of posting. Graveyard shows 261 archived GitHub-backup repos, consistent with a commoditized, low-retention category.",
+      "stage_2": {
+        "customer": "Technical co-founders / CTOs of 5-50 person companies on paid GitHub Team or Enterprise whose personal GitHub account (often 10+ years old, with legacy Education/Student flags or old PATs) is simultaneously an org owner and the home of their open-source projects, and who have just been hit by automated suspension with no human support path. The post author is one: co-founder, paying enterprise org, OSS maintainer, suspended via a stale 2010s Education benefit trigger.",
+        "where": "Hacker News (dozens of 'GitHub suspended my account' Ask/Tell HN threads: 23832437, 39422068, 41636466, 50259246, 50286316), r/github, r/devops, r/ExperiencedDevs, GitHub Community Discussions (github.community support category), @GitHubSupport replies on X, Indie Hackers / YC founder Slack channels where founders ask 'does anyone know someone at GitHub'.",
+        "pays_for": "GitHub Team ($4/user/mo) or Enterprise ($21/user/mo), GitHub Copilot Business, CI minutes, Vercel/Netlify/Fly for deploys off GitHub, 1Password/Bitwarden Teams, and in some cases SaaS backup (GitProtect, Rewind) or self-hosted Gitea/GitLab."
+      },
+      "stage_3": {
+        "real_posts": [
+          "https://news.ycombinator.com/item?id=50259246",
+          "https://news.ycombinator.com/item?id=50286316",
+          "https://news.ycombinator.com/item?id=41636466",
+          "https://news.ycombinator.com/item?id=49929822",
+          "https://news.ycombinator.com/item?id=23832437",
+          "https://news.ycombinator.com/item?id=39422068"
+        ],
+        "urgent": "Author: 'waiting months for a resolution is just not an option', locked out of co-founded company's work and all OSS projects. Thread 50259246 (2026-10-27): author could not even submit the support ticket (401 error on the suspension form). Comment on candidate thread from aashish16yadav: suspended 5+ months with no email or notice. Thread 41636466: paying user flagged, no support response for over a month. 39422068 (130 points): orgs banned without warning. People act the same day, by posting publicly, because there is no other lever.",
+        "valuable": "Cost is full loss of access to the primary engineering platform: for a paying enterprise org that is the entire dev workflow (code, CI, PRs, issues) for however many seats they pay for; 41636466 documents 5+ weeks of a paid account flagged; 50342838 commenter documents 5 months. For a 10-person org on Enterprise that is ~$210/mo paid for a service the owner cannot use plus the owner's blocked working hours. Also reputational cost to OSS maintainers whose repos vanish (LibreTube, Automatic1111, Marak, lucidrains cases on HN)."
+      },
+      "stage_4": {
+        "software": [
+          "GitProtect.io (https://gitprotect.io) \u2014 funded DevOps backup & DR for GitHub incl. metadata; insufficient only in that it is priced for teams and does nothing at the crisis moment, but it fully covers the prevention case",
+          "Rewind Backups for GitHub, formerly BackHub (https://rewind.com/products/backups/github/) \u2014 funded, one-click GitHub org backup/restore; same: covers prevention, cannot reinstate an account",
+          "Cloudback (https://cloudback.it) \u2014 GitHub Marketplace backup for repos/metadata; same gap. Free OSS also covers it: gabrie30/ghorg (2,165 stars, pushed 2026-11-06), josegonzalez/python-github-backup (1,605, pushed 2026-11-05), RayLabsHQ/gitea-mirror (1,510, pushed 2026-11-06), native Gitea/GitLab pull mirroring"
+        ],
+        "workarounds": [
+          "Post on Hacker News / X and hope a GitHub employee notices (this is what actually works: the candidate author's follow-up comment says 'This was resolved for me')",
+          "Keep 2+ org owners and a second GitHub account so the org survives one personal-account suspension (the author's org was still accessible to others for exactly this reason)",
+          "Self-host Gitea/Forgejo/GitLab or keep local clones and 'just deal with it' until the ticket is answered"
+        ],
+        "graveyard": "GitHub search for 'github backup' archived:true returns 261 archived repos, including once-popular ones (qvl/ghbackup 163 stars, ddollar/github-backup 113, ghaiklor/backup-my-github 110, benbalter/github_records_archiver 110, zalando/ghe-backup 34). They died because the job is a cron'd git clone plus an API dump; it commoditized into a handful of maintained OSS tools and three funded SaaS vendors, leaving no room for another entrant. No evidence of any prior product that addressed reinstatement itself, because none can."
+      },
+      "stage_5": null,
+      "stage_6": null,
+      "id": "hn_50342838",
+      "title": "Ask HN: What to do about incorrectly suspended GitHub account, no notice?",
+      "url": "https://news.ycombinator.com/item?id=50342838",
+      "source": "hackernews",
+      "score": 7,
+      "num_comments": 3
+    }
+  ]
+}

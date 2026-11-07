@@ -1,0 +1,15 @@
+SCORE: 7/10
+
+TOP 3 FIXES:
+1. **Headline overclaims the cadence.** "The minute ubuntu.com flips your CVE" is falsifiable and false. The demo itself shows "polling every 10 min" and marketing_copy.txt says the same. Change "the minute" to "within 10 minutes of" in both `src/components/Hero.tsx` and the `metadata.title` in `src/app/layout.tsx`. The number makes it more believable, not less.
+2. **The only unsignable claim is not on the page as text.** The differentiator against USN RSS, Trivy/Grype, and Livepatch lives in the objections block of marketing_copy.txt and in the video, where reduced-motion visitors never see it. Add one sentence under the form or as the LogoStrip lead line, lifted from that file: "The USN feed fires for every package in every release, after the fix ships. This fires only for your CVE and flavor, and it tells you when the tracker row flips to pending, before the USN exists. Log the nft or sysctl rule you applied and the released email tells you what to roll back." SysWard can sign the current headline. Nobody can sign that.
+3. **Footer kills trust at the moment of the ask.** Privacy and Terms point to "#", Contact is hello@example.com, GitHub and X go to bare domains. The target customer clicks Privacy before handing an email to an unknown domain, and a dead link on a security page reads as phishing. Delete every placeholder entry in `src/components/Footer.tsx` and leave either one real mailto or nothing.
+
+GREEN FLAGS:
+- Headline passes all three Dry tests: concrete nouns (ubuntu.com, needed, released, linux-generic, 24.04), active verb, one promise, no adjectives.
+- The live status line pulled from the Ubuntu CVE tracker is proof and tension in one sentence. "Public for N days with no USN" is a bold claim backed by data, not a testimonial.
+- The subheadline is identity copy. "Set the sysctl by hand last week and is now waiting on Canonical with no ETA" is the OP's exact situation, written in the customer's words.
+- Benefit CTA ("Track your first CVE") instead of a label CTA, and the flavor dropdown shows live tracker status per option, so the form itself demonstrates the product.
+- The post-submit confirmation restates the promise in plain terms: one email per status change, needed, pending, released.
+- Honest proof. The demo caption says it is simulated and that the released step has not happened. No invented logos, user counts, or quotes.
+- "Polled from the feeds you already read by hand" is customer language that names the current workaround rather than a feature.

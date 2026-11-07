@@ -1,0 +1,17 @@
+HOOK: Get an email the minute ubuntu.com flips your CVE from "needed" to "released" for linux-generic on 24.04.
+
+SUBHEADLINE: For the sysadmin running 10 to 200 Ubuntu LTS boxes without Pro, who set the sysctl by hand last week and is now waiting on Canonical with no ETA.
+
+VALUE_PROP:
+Paste the CVE IDs you are watching, pick your releases and kernel flavors. We poll the Ubuntu CVE tracker and the USN feed every 10 minutes.
+One email or webhook per status change: needed, pending, released, with the USN number and the fixed package version to apt install.
+Log the mitigation you applied next to the CVE. The "released" email tells you which sysctl or iptables rule you can roll back.
+
+CTA: Track your first CVE
+
+SECONDARY_CTA: See a sample alert
+
+OBJECTIONS:
+- "Ubuntu Pro is free for 5 machines and Livepatch patches the kernel without a reboot." Livepatch delivers Canonical's fix faster, but it ships nothing until Canonical finishes the fix. This tells you where that fix is while you wait, and covers the other 195 machines you are not paying Pro for.
+- "Trivy, Grype and SysWard already tell me 'fix available: no'." They scan your hosts and report your status. This watches Canonical's status: the tracker row flipped to pending, the USN posted, the package landed in -security. That is the signal between "no fix" and "run apt" that nothing else sends you.
+- "I can subscribe to the USN RSS feed myself." The USN feed fires for every package in every release. This fires only for the CVEs, releases and flavors you listed, and it reports status before the USN exists, which is the week you actually care about.

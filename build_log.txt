@@ -1,0 +1,20 @@
+The MVP is built, type-checked, linted, production-built, and verified in a real browser at desktop and 375px widths. Nothing is committed, since you didn't ask for that.
+
+**What it does**
+
+- **Hero** uses the hook and subheadline verbatim, then one line of loss-aversion copy computed at render time from the live Ubuntu CVE JSON API: the CVE, its CVSS, days since publication, whether a USN exists, and the tracker status for linux-generic on 24.04. The page revalidates every 10 minutes on Vercel, matching the copy's polling promise. If the fetch fails, the line shows the fetch error, not fake data.
+- **Signup form** is one row: a release/flavor dropdown whose options carry the real tracker status and version for each flavor, an email field, and the orange "Track your first CVE" button. Submitting posts to the subscribe API route, which logs the email, flavor, and CVE to serverless logs, then shows an inline confirmation.
+- **Remotion demo** loops a 6-second composition: the CVE ID typed in, flavors chosen, the tracker row flipping needed to pending to released, then the alert email with the fixed package version and the real nftables rollback command from Canonical's mitigation. The caption under it states that the released step is simulated and has not happened yet.
+- **Logo strip and footer** are plain text, with no extra sections.
+
+**Verified**
+
+- Live data as of this build: CVE-2026-98432, CVSS 9.8, published 2026-10-15, no USN, status pending with 6.8.0-149.149 for linux-generic on 24.04.
+- Browser test: typed an email, clicked the CTA, saw the confirmation, and the log line appeared in the server output. Bad input returns 400.
+
+**Things to know**
+
+- **No emails are actually sent.** This is a fake-door test. Signups exist only in Vercel function logs, so check those for the test signal.
+- **Footer Privacy and Terms** link to "#" since no legal pages exist.
+- **Conflicts resolved toward the radical-simplicity rules.** I dropped the design system's webinar pattern, timers, and the psychology brief's separate status table and monospace styling. The Aha moment lives in the dropdown's real statuses and the demo instead.
+- **Process cleanup:** while restarting the local server I killed two `next-server` processes by name. One may have belonged to another build's session on this machine. If something else was running, it needs a restart.

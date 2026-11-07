@@ -1,0 +1,11 @@
+PRINCIPLE 1: Aha! Moment
+  Why it fits: The test signal is blank in the brief, so I'm assuming it is "email signup for per-kernel-flavor USN/CVE alerts"; this customer already reads ubuntu.com/security/CVE-* by hand, so the only thing that earns a signup is seeing the product do that job for their exact flavor before they are asked for anything.
+  How to apply: Make the hero a live, read-only status table for one real current CVE: rows per LTS release and kernel flavor (24.04 linux-generic, 22.04 linux-hwe, etc.), columns for "CVE published", "USN status: pending/released", "days open", and "interim mitigation (sysctl/iptables)", pulled from the actual Ubuntu CVE tracker at build time. Do not use placeholder data; if the fetch fails, show the fetch error, not fake rows.
+
+PRINCIPLE 2: Spark Effect
+  Why it fits: This person posts to HN instead of opening a vendor ticket because tickets are heavy; a signup that feels like Ubuntu Pro onboarding (account, org, fleet inventory) will lose them, while a one-field ask matches how they already consume this information.
+  How to apply: Directly below the status table, a single-row form: one release/flavor dropdown prefilled with the row they hovered or clicked, one email field, one button labeled "Alert me when the USN lands for this flavor". No password, no account creation, no "tell us about your company", and the form stays visible without scrolling on a 1280px-wide viewport.
+
+PRINCIPLE 3: Loss Aversion
+  Why it fits: The OP's pain is the exposure window, not the patch itself (mitigations in place for a week while still unpatched), so framing the ask around time already lost converts better than framing it around convenience gained.
+  How to apply: Put one line of copy directly above the button that states the measured gap for the CVE shown in the hero, e.g. "This CVE has been public for N days with no USN for your flavor", with N computed from the real published-date and current date at render time, and rendered in the same monospace style as the table. Keep it to this one line; no countdown timer, no "N people subscribed" counter, so it does not stack into persuasion creep.
